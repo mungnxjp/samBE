@@ -27,13 +27,18 @@ exports.getByIdHandler = async (event) => {
   try {
     const params = {
       TableName : tableName,
-      Key: { id: id },
+      Key: { PK: id },
     };
     const data = await docClient.get(params).promise();
     const item = data.Item;
    
     response = {
       statusCode: 200,
+      headers: {
+        "Access-Control-Allow-Headers" : "Content-Type",
+        "Access-Control-Allow-Origin": "*", // Allow from anywhere 
+        "Access-Control-Allow-Methods": "GET" // Allow only GET request 
+    },
       body: JSON.stringify(item)
     };
   } catch (ResourceNotFoundException) {

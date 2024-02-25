@@ -32,6 +32,11 @@ exports.getAllItemsHandler = async (event) => {
 
         response = {
             statusCode: 200,
+            headers: {
+                "Access-Control-Allow-Headers" : "Content-Type",
+                "Access-Control-Allow-Origin": "*", // Allow from anywhere 
+                "Access-Control-Allow-Methods": "GET" // Allow only GET request 
+            },
             body: JSON.stringify(items)
         };
     } catch (ResourceNotFoundException) {
